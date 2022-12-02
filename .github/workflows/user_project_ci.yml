@@ -56,7 +56,7 @@ jobs:
       run: |
         ir_converter_main --top=user_module verilog/rtl/user_module.x > verilog/rtl/user_module.ir
         opt_main verilog/rtl/user_module.ir > verilog/rtl/user_module_opt.ir
-        codegen_main --module_name user_module --use_system_verilog=false --generator=combinational verilog/rtl/user_module_opt.ir > src/user_module.v
+        codegen_main --module_name user_module --use_system_verilog=false --generator=combinational verilog/rtl/user_module_opt.ir > verilog/rtl/user_module.v
     - name: add verilog to summary
       run: |
         cat << EOF >> $GITHUB_STEP_SUMMARY
