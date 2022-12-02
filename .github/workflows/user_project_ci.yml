@@ -123,7 +123,7 @@ jobs:
           verilog/rtl/user_module.ir
           verilog/rtl/user_module_opt.ir
           verilog/rtl/user_module.v
-        key: ${{ runner.os }}-${{ env.CACHE_NUMBER }}-rtl-${{ github.run_id }}
+        key: ${{ runner.os }}-${{ env.CACHE_KEY }}-rtl-${{ github.run_id }}
 
     - name: fetch verilog and build config
       run: |
