@@ -49,30 +49,30 @@ jobs:
         cat << EOF >> $GITHUB_STEP_SUMMARY
         # test
         \`\`\`
-        `interpreter_main src/user_module.x 2>&1`
+        `interpreter_main verilog/rtl/user_module.x 2>&1`
         \`\`\`
         EOF
     - name: generate rtl
       run: |
-        ir_converter_main --top=user_module src/user_module.x > src/user_module.ir
-        opt_main src/user_module.ir > src/user_module_opt.ir
-        codegen_main --module_name user_module --use_system_verilog=false --generator=combinational src/user_module_opt.ir > src/user_module.v
+        ir_converter_main --top=user_module verilog/rtl/user_module.x > verilog/rtl/user_module.ir
+        opt_main verilog/rtl/user_module.ir > verilog/rtl/user_module_opt.ir
+        codegen_main --module_name user_module --use_system_verilog=false --generator=combinational verilog/rtl/user_module_opt.ir > src/user_module.v
     - name: add verilog to summary
       run: |
         cat << EOF >> $GITHUB_STEP_SUMMARY
         # codegen
         \`\`\`
-        `cat src/user_module.v`
+        `cat verilog/rtl/user_module.v`
         \`\`\`
         EOF
     - name: populate rtl cache
       uses: actions/cache@v3
       with:
         path: |
-          src/user_module.x
-          src/user_module.ir
-          src/user_module_opt.ir
-          src/user_module.v
+          verilog/rtl/user_module.x
+          verilog/rtl/user_module.ir
+          verilog/rtl/user_module_opt.ir
+          verilog/rtl/user_module.v
         key: ${{ runner.os }}-${{ env.CACHE_KEY }}-rtl-${{ github.run_id }}
   gds:
     needs:
@@ -119,10 +119,10 @@ jobs:
       uses: actions/cache@v3
       with:
         path: |
-          src/user_module.x
-          src/user_module.ir
-          src/user_module_opt.ir
-          src/user_module.v
+          verilog/rtl/user_module.x
+          verilog/rtl/user_module.ir
+          verilog/rtl/user_module_opt.ir
+          verilog/rtl/user_module.v
         key: ${{ runner.os }}-${{ env.CACHE_NUMBER }}-rtl-${{ github.run_id }}
 
     - name: fetch verilog and build config
