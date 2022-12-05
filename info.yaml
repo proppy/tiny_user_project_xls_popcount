@@ -4,8 +4,7 @@ project:
   wokwi_id: 0
   source_files:
     - verilog/rtl/user_module.v
-    - verilog/rtl/top.v
-  top_module:  "top"
+  top_module:  "user_module"
 
 # As everyone will have access to all designs, try to make it easy for someone new to your design to know what
 # it does and how to operate it.
